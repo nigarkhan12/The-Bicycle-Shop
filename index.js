@@ -18,7 +18,17 @@ const server = http.createServer(async (req, res) => {
     const id = myURL.searchParams.get('id');
 
     if (pathname === '/') {
-        const html = await fs.readFile('./view/bicycles.html', 'utf-8');
+        let html = await fs.readFile('./view/bicycles.html', 'utf-8');
+
+        let allMainBicycles = await fs.readFile('./view/main/bicycle_Main.html', 'utf-8');
+
+        let allTheBicycles = ``;
+
+        for (let index = 0; index < 6; index++){
+            allTheBicycles += allMainBicycles;
+        }
+        html = html.replace(/<%AllMainBicycles%>/g,allTheBicycles);
+
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(html);
     }
@@ -58,7 +68,6 @@ const server = http.createServer(async (req, res) => {
         res.writeHead(404, { 'Content-Type': 'text/html' });
         res.end('<div><h1>File Not Found</h1></div>');
     }
-
 });
 
 

@@ -1,2 +1,2 @@
 # The-Bicycle-Shop
-This project is build using pure NodeJS
+This project build using pure NodeJS
